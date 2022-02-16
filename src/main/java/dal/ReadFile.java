@@ -20,15 +20,25 @@ public class ReadFile {
 	 */
 	public static List<String> readLineByLine(String filePath) {
 		List<String> stringList = new ArrayList<String>();
-		String curentLine = null;
-		try (BufferedReader br = new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
-			while ((curentLine = br.readLine()) != null) {
-				stringList.add(curentLine);
+		String currentLine = null;
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8));
+			while ((currentLine = br.readLine()) != null) {
+				stringList.add(currentLine);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		return stringList;
 	}

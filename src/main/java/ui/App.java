@@ -2,15 +2,17 @@ package ui;
 
 import java.util.List;
 
-import dal.ReadFile;
+import model.User;
+import service.UserService;
 
 public class App {
+
 	public static void main(String[] args) {
 
-		String filePath = "input.txt";
+		UserService userService = new UserService();
+		
+		List<User> userList = userService.getUserList();
 
-		List<String> allLines = ReadFile.readLineByLine(filePath);
-
-		allLines.stream().forEach(line -> System.out.println(line));
+		userList.stream().forEach(user -> System.out.println(user));
 	}
 }
