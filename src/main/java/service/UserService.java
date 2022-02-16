@@ -1,10 +1,9 @@
 package service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,14 +27,13 @@ public class UserService {
 
 		allLines.stream().forEach(line -> {
 			String formatLine = removeApostrophes(line);
+			User user;
 			try {
-				User user = objectMapper.readValue(formatLine, User.class);
+				user = objectMapper.readValue(formatLine, User.class);
 				userList.add(user);
-			} catch (JsonParseException e) {
-				e.printStackTrace();
 			} catch (JsonMappingException e) {
 				e.printStackTrace();
-			} catch (IOException e) {
+			} catch (JsonProcessingException e) {
 				e.printStackTrace();
 			}
 		});

@@ -7,7 +7,7 @@ public class User {
 	private String car;
 
 	public User() {
-
+		// Default Constructor
 	}
 
 	public String getName() {
